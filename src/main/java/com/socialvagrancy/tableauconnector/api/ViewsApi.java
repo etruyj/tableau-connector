@@ -44,11 +44,7 @@ public class ViewsApi {
         log.debug("Response [{}]: {}", response.getStatusLine().getStatusCode(), responseStr.length() > responseStrLogLength ? responseStr.substring(0, responseStrLogLength) : responseStr);
 
         if(response.getStatusLine().getStatusCode() < 300) {
-            if(responseStr.length() > 1) {
-                return new TableauCsvDataModel().fromCsvString(responseStr);
-            } else {
-                throw new Exception("No data in API response.");
-            }
+            return TableauCsvDataModel.fromCsvString(responseStr);
         } else {
             throw new Exception("Failed to get data for view [" + view_id + "].");
         }
